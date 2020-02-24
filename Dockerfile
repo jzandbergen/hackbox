@@ -1,0 +1,20 @@
+FROM debian:buster-slim
+
+RUN apt-get update && \
+	apt-get -y upgrade && \
+	apt-get -y install \
+		net-tools \
+		vim \
+		git \
+		nmap \
+		ncat \
+		dnsutils \
+		tcpdump \
+		telnet \
+		curl \
+		wget 
+
+COPY files/root/.bashrc /root/.bashrc
+
+WORKDIR /root
+		
