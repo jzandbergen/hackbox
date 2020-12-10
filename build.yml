@@ -1,0 +1,11 @@
+image: alpine/edge
+packages:
+  - docker
+sources:
+  - https://git.sr.ht/~goestin/hackbox
+tasks:
+  - test123: |
+    docker version
+    pwd
+    ls -lah
+    whoami
