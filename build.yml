@@ -7,5 +7,4 @@ tasks:
   - test123: |
     docker version
     pwd
-    ls -lah
     whoami
