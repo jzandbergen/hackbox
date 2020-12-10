@@ -5,6 +5,7 @@ sources:
   - https://git.sr.ht/~goestin/hackbox
 tasks:
   - test123: |
-    docker version
-    pwd
-    whoami
+      docker version
+      pwd
+      ls -lah
+      whoami
