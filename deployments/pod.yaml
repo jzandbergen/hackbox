@@ -6,7 +6,7 @@ spec:
   #nodeName: k8s-node1
   containers:
   - name: hackbox
-    image: goestin/hackbox:latest
+    image: ghcr.io/jzandbergen/hackbox:latest
     resources:
       requests:
         memory: "50Mi"
