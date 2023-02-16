@@ -1,5 +1,6 @@
 build:
-	docker build . -t goestin/hackbox:latest
+	podman build . -t docker.io/goestin/hackbox:latest
 
 push:
-	docker push goestin/hackbox
+	podman push docker.io/goestin/hackbox
+
