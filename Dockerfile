@@ -20,6 +20,9 @@ RUN apt-get update && \
         socat \
         postgresql-client \
         pgformatter && \
+    curl -LO https://github.com/nats-io/natscli/releases/download/v0.1.4/nats-0.1.4-amd64.deb && \
+    dpkg -i nats-0.1.4-amd64.deb && \
+    rm -f nats-0.1.4-amd64.deb && \
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
     ~/.fzf/install
