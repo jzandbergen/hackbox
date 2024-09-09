@@ -35,7 +35,6 @@ COPY files/root/.vimrc /root/.vimrc
 
 RUN vim +PluginInstall +qall && \
     apt-get clean && \
-    echo "colorscheme gotham" >> /root/.vimrc && \
     echo "set bg=dark" >> /root/.vimrc 
 
 WORKDIR /root
