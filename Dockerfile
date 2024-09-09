@@ -19,6 +19,7 @@ RUN apt-get update && \
         iproute2 \
         socat \
         postgresql-client \
+        shelldap \
         pgformatter && \
     curl -LO https://github.com/nats-io/natscli/releases/download/v0.1.4/nats-0.1.4-amd64.deb && \
     dpkg -i nats-0.1.4-amd64.deb && \
