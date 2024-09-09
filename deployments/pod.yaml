@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: hackbox
-    image: ghcr.io/jzandbergen/hackbox:v0.1.3
+    image: ghcr.io/jzandbergen/hackbox:v0.1.4
     securityContext:
       privileged: True
     resources:
