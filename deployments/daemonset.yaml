@@ -8,37 +8,48 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: hackbox
+      app: hackbox
   template:
     metadata:
       labels:
-        name: hackbox
+        app: hackbox
     spec:
+      # Tolerations ensure hackbox runs on every node including control-plane nodes,
+      # tainted nodes, and nodes with the CriticalAddonsOnly taint.
+      # Remove individual entries to exclude certain node types.
       tolerations:
-      # this toleration is to have the daemonset runnable on master nodes
-      # remove it if your masters can't run pods
-        - effect: NoSchedule
-          operator: Exists
-        - effect: NoExecute
-          operator: Exists
-        - key: CriticalAddonsOnly
-          operator: Exists
+      - effect: NoSchedule
+        operator: Exists
+      - effect: NoExecute
+        operator: Exists
+      - key: CriticalAddonsOnly
+        operator: Exists
+
+      # Use hostNetwork to share the node's network namespace.
+      # Enables tcpdump and connectivity checks at the node level.
+      # hostNetwork: false
+
       containers:
       - name: hackbox
         image: ghcr.io/jzandbergen/hackbox:latest
+
+        # privileged gives full access to the host kernel — needed for tcpdump,
+        # raw sockets, etc. Remove if not required.
+        securityContext:
+          privileged: true
+
         resources:
-          limits:
-            memory: 200Mi
           requests:
-            cpu: 100m
-            memory: 200Mi
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+
+        # stdin + tty are required to attach an interactive shell.
+        # To attach: kubectl attach -it <pod-name>
+        # List pods: kubectl get pods -l app=hackbox -o wide
         stdin: true
         tty: true
         command: ["/bin/bash"]
-      terminationGracePeriodSeconds: 30
 
-
-
-
-
-
+      terminationGracePeriodSeconds: 5
