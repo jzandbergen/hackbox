@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 RUN apt-get update && \
 	apt-get -y upgrade && \
@@ -21,15 +21,16 @@ RUN apt-get update && \
         postgresql-client \
         shelldap \
         pgformatter && \
-    curl -LO https://github.com/nats-io/natscli/releases/download/v0.1.4/nats-0.1.4-amd64.deb && \
-    dpkg -i nats-0.1.4-amd64.deb && \
-    rm -f nats-0.1.4-amd64.deb && \
+    curl -LO https://github.com/nats-io/natscli/releases/download/v0.4.0/nats-0.4.0-amd64.deb && \
+    dpkg -i nats-0.4.0-amd64.deb && \
+    rm -f nats-0.4.0-amd64.deb && \
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-    ~/.fzf/install
-    
-ENV PATH=${PATH}:/usr/local/go/bin
+    ~/.fzf/install && \
+    curl https://mise.run | sh
 
+ENV PATH=/root/.local/bin:${PATH}
+    
 COPY files/root/.bashrc /root/.bashrc
 COPY files/root/.vimrc /root/.vimrc
 
