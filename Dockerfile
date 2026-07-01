@@ -18,9 +18,17 @@ RUN apt-get update && \
         iperf \
         iproute2 \
         socat \
-        postgresql-client \
         shelldap \
-        pgformatter && \
+        pgformatter \
+        gnupg && \
+    install -d /usr/share/postgresql-common/pgdg && \
+    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+        -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc && \
+    echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] \
+        https://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" \
+        > /etc/apt/sources.list.d/pgdg.list && \
+    apt-get update && \
+    apt-get -y install postgresql-client-18 && \
     curl -LO https://github.com/nats-io/natscli/releases/download/v0.4.0/nats-0.4.0-amd64.deb && \
     dpkg -i nats-0.4.0-amd64.deb && \
     rm -f nats-0.4.0-amd64.deb && \
